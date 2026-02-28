@@ -36,6 +36,7 @@ wails build
 - 文件：`.github/workflows/release-tag.yml`
 - 触发：推送 tag（`v*`）
 - 动作：自动构建 `macOS(universal)` 和 `Windows(amd64)`，并上传到 GitHub Release
+- 版本注入：构建时通过 `-ldflags "-X main.Version=<tag>"` 写入应用版本
 
 发布步骤：
 

@@ -8,6 +8,8 @@ export function CalculatePosition(arg1:main.PositionRequest):Promise<main.Positi
 
 export function DeleteInstrument(arg1:string):Promise<void>;
 
+export function GetAppVersion():Promise<string>;
+
 export function GetRecentCalculations(arg1:number):Promise<Array<main.CalculationRecord>>;
 
 export function ListInstruments(arg1:string):Promise<Array<main.Instrument>>;

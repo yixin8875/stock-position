@@ -38,7 +38,9 @@ jobs:
         run: npm ci --prefix frontend
 
       - name: Build macOS app
-        run: wails build -clean -platform darwin/universal
+        run: |
+          LD_FLAGS="-X main.Version=${GITHUB_REF_NAME}"
+          wails build -clean -platform darwin/universal -ldflags "$LD_FLAGS"
 
       - name: Package macOS artifact
         run: |
@@ -88,7 +90,10 @@ jobs:
         run: npm ci --prefix frontend
 
       - name: Build Windows app + installer
-        run: wails build -clean -platform windows/amd64 -nsis
+        shell: pwsh
+        run: |
+          $ldflags = "-X main.Version=$env:GITHUB_REF_NAME"
+          wails build -clean -platform windows/amd64 -nsis -ldflags $ldflags
 
       - name: Package Windows artifact
         shell: pwsh

@@ -14,6 +14,7 @@ import {
   CalculateAndSave,
   CalculatePosition,
   DeleteInstrument,
+  GetAppVersion,
   GetRecentCalculations,
   ListInstruments,
   ListMarkets,
@@ -100,6 +101,7 @@ function App() {
   const [booting, setBooting] = useState(true);
   const [loadingCalc, setLoadingCalc] = useState(false);
   const [loadingSaveInstrument, setLoadingSaveInstrument] = useState(false);
+  const [appVersion, setAppVersion] = useState("dev");
   const [error, setError] = useState("");
 
   const selectedCalcInstrument = useMemo(
@@ -113,6 +115,9 @@ function App() {
   useEffect(() => {
     const bootstrap = async () => {
       try {
+        const version = (await GetAppVersion()) as string;
+        setAppVersion(version || "dev");
+
         const marketRows = (await ListMarkets()) as Market[];
         setMarkets(marketRows);
         if (marketRows.length === 0) {
@@ -335,7 +340,12 @@ function App() {
               全市场仓位系统
             </p>
             <h1 className="mt-2 text-2xl font-bold text-slate-800">仓位计算器 + 品种配置</h1>
-            <p className="mt-1 text-sm text-slate-500">A股 / 国内期货 / 海外期货统一以损定仓</p>
+            <p className="mt-1 text-sm text-slate-500">
+              A股 / 国内期货 / 海外期货统一以损定仓
+              <span className="ml-2 rounded-full border border-sky-100 bg-sky-50 px-2 py-0.5 text-xs text-sky-700">
+                {appVersion}
+              </span>
+            </p>
           </div>
           <div className="rounded-xl bg-gradient-to-r from-sky-600 to-cyan-500 px-4 py-3 text-white shadow-md">
             <p className="text-xs opacity-90">当前单笔风险预算</p>

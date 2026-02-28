@@ -66,6 +66,11 @@ func (a *App) ListInstruments(marketID string) ([]Instrument, error) {
 	return store.ListInstruments(marketID)
 }
 
+// GetAppVersion returns app version injected by build pipeline.
+func (a *App) GetAppVersion() string {
+	return Version
+}
+
 // UpsertInstrument creates or updates an instrument for config page.
 func (a *App) UpsertInstrument(req InstrumentUpsertRequest) (Instrument, error) {
 	store, err := a.withStore()

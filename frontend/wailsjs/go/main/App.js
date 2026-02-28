@@ -14,6 +14,10 @@ export function DeleteInstrument(arg1) {
   return window['go']['main']['App']['DeleteInstrument'](arg1);
 }
 
+export function GetAppVersion() {
+  return window['go']['main']['App']['GetAppVersion']();
+}
+
 export function GetRecentCalculations(arg1) {
   return window['go']['main']['App']['GetRecentCalculations'](arg1);
 }
