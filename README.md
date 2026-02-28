@@ -29,6 +29,23 @@ wails dev
 wails build
 ```
 
+## GitHub Tag 自动发布
+
+已集成 GitHub Actions 工作流：
+
+- 文件：`.github/workflows/release-tag.yml`
+- 触发：推送 tag（`v*`）
+- 动作：自动构建 `macOS(universal)` 和 `Windows(amd64)`，并上传到 GitHub Release
+
+发布步骤：
+
+```bash
+git tag v0.1.0
+git push origin v0.1.0
+```
+
+推送后在 GitHub 的 `Actions` 里能看到构建任务，成功后在 `Releases` 出现对应版本资产包。
+
 ## 数据库位置
 
 应用会在本机用户配置目录自动创建 SQLite：
